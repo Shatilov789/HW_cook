@@ -31,4 +31,44 @@ with open('recept.txt', encoding='utf-8') as f:
 for key, value in cook_book.items():
     print(f'{key} : \n{value}\n')
 
+def get_shop_list_by_dishes(dishes, person_count):
 
+    dic2 = []
+    dic3 = []
+    resultdict = []
+    for key, values in cook_book.items():
+        for val in dishes:
+            if key == val:
+                for df in values:
+                    dic2.append(df)
+
+    for dish in dic2:
+        for dish2, val in dish.items():
+
+            if dish2 == 'quantity':
+               d1 = dict.fromkeys(['quantity'], int(val)* person_count)
+            if dish2 == 'measure':
+               d = dict.fromkeys(['measure'], val)
+               d.update(d1)
+               dic3.append(d)
+
+    x =0
+    for dish in dic2:
+        for dish2, val in dish.items():
+
+            if dish2 == 'ingredient_name':
+                d = dict.fromkeys([val], dic3[x])
+                resultdict.append(d)
+        x += 1
+
+    for dish_per in resultdict:
+        for dish in dish_per:
+            print(f'{dish}: {dish_per[dish]}')
+
+get_shop_list_by_dishes(['Запеченный картофель', 'Омлет', 'Фахитос'], 2)
+
+
+import os
+f = os.listdir(path="hw")
+print()
+print(f)
