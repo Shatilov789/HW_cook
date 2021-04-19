@@ -52,14 +52,14 @@ def get_shop_list_by_dishes(dishes, person_count):
                d.update(d1)
                dic3.append(d)
 
-    x =0
+    counter =0
     for dish in dic2:
         for dish2, val in dish.items():
 
             if dish2 == 'ingredient_name':
                 d = dict.fromkeys([val], dic3[x])
                 resultdict.append(d)
-        x += 1
+        counter += 1
 
     for dish_per in resultdict:
         for dish in dish_per:
@@ -69,6 +69,32 @@ get_shop_list_by_dishes(['Запеченный картофель', 'Омлет'
 
 
 import os
-f = os.listdir(path="hw")
-print()
-print(f)
+os.chdir(path="hw")
+list_of_files = os.listdir(path=".")
+dic4 = []
+x = 0
+d ={}
+
+for _ in range(3):
+ with open(list_of_files[x], encoding='utf-8') as f:
+    lines = 0
+    for line in f:
+     lines = lines + 1
+     d2 = dict.fromkeys([list_of_files[x]], lines)
+     d.update(d2)
+ x +=1
+dic4.append(d)
+
+sorted_dict = {}
+for key1 in dic4:
+    sorted_values = sorted(key1.values())
+    for i in sorted_values:
+        for k in key1.keys():
+            if key1[k] == i:
+                sorted_dict[k] = key1[k]
+                break
+
+with open("final.txt", "w", encoding='utf-8') as file:
+    for key, values in sorted_dict.items():
+      file.write(f'Имя файла: {key}\n'
+                 f'Количество строк в нем:  {values}\n')
