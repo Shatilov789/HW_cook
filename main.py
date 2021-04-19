@@ -33,32 +33,34 @@ for key, value in cook_book.items():
 
 def get_shop_list_by_dishes(dishes, person_count):
 
-    dic2 = []
-    dic3 = []
-    resultdict = []
+    list = []
+
     for key, values in cook_book.items():
         for val in dishes:
             if key == val:
-                for df in values:
-                    dic2.append(df)
+                for value in values:
+                    list.append(value)
 
-    for dish in dic2:
+
+    list1 = []
+    for dish in list:
         for dish2, val in dish.items():
 
             if dish2 == 'quantity':
-               d1 = dict.fromkeys(['quantity'], int(val)* person_count)
+               dic_0 = dict.fromkeys(['quantity'], int(val)* person_count)
             if dish2 == 'measure':
-               d = dict.fromkeys(['measure'], val)
-               d.update(d1)
-               dic3.append(d)
+               dic_1 = dict.fromkeys(['measure'], val)
+               dic_1.update(dic_0)
+               list1.append(dic_1)
 
+    resultdict = []
     counter =0
-    for dish in dic2:
+    for dish in list:
         for dish2, val in dish.items():
 
             if dish2 == 'ingredient_name':
-                d = dict.fromkeys([val], dic3[x])
-                resultdict.append(d)
+                dic_2 = dict.fromkeys([val], list1[counter])
+                resultdict.append(dic_2)
         counter += 1
 
     for dish_per in resultdict:
@@ -71,22 +73,22 @@ get_shop_list_by_dishes(['Запеченный картофель', 'Омлет'
 import os
 os.chdir(path="hw")
 list_of_files = os.listdir(path=".")
-dic4 = []
-x = 0
-d ={}
+list3 = []
+counter = 0
+dict_update ={}
 
 for _ in range(3):
- with open(list_of_files[x], encoding='utf-8') as f:
+ with open(list_of_files[counter], encoding='utf-8') as f:
     lines = 0
     for line in f:
      lines = lines + 1
-     d2 = dict.fromkeys([list_of_files[x]], lines)
-     d.update(d2)
- x +=1
-dic4.append(d)
+     dic_4 = dict.fromkeys([list_of_files[counter]], lines)
+     dict_update.update(dic_4)
+ counter +=1
+list3.append(dict_update)
 
 sorted_dict = {}
-for key1 in dic4:
+for key1 in list3:
     sorted_values = sorted(key1.values())
     for i in sorted_values:
         for k in key1.keys():
